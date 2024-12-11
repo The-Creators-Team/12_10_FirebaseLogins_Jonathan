@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">FirebaseSampleJonathan</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="title_login">Login</string>
+    <string name="title_github">github</string>
+    <string name="google_sign_in">Google Sign In</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="web_client_id">627675879229-2r252vcc8abn8r83rgk60v69rd3o6s40.apps.googleusercontent.com</string>
+    <string name="title_github_login">Github Login</string>
+    <string name="github_login_button">Login to Github</string>
+    <string name="new_account">New Acccount</string>
+</resources>

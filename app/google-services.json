@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "627675879229",
+    "project_id": "jonathan-s-firebase-sample",
+    "storage_bucket": "jonathan-s-firebase-sample.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627675879229:android:c73b98f71d5d2f24b5d754",
+        "android_client_info": {
+          "package_name": "com.example.firebasesamplejonathan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "627675879229-2r252vcc8abn8r83rgk60v69rd3o6s40.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw61E_d_k4d1V03_L-s1toYsD6Zjg3xL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "627675879229-2r252vcc8abn8r83rgk60v69rd3o6s40.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
