@@ -61,12 +61,11 @@ class GithubLoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //initializing the auth
         auth = Firebase.auth
-        setUpGithubAuth()
+        //setUpGithubAuth()
 
         binding.githubLoginButton.setOnClickListener{
             Toast.makeText(context, "Look at you you done click da button", Toast.LENGTH_LONG).show()
             setUpGithubAuth()
-            //signInWithGithubProvider()
         }
     }
 
@@ -115,7 +114,7 @@ class GithubLoginFragment : Fragment() {
         // [END auth_oidc_provider_signin]
     }
 
-    private fun firebaseAuthWithGithub(idToken: String) {
+/*    private fun firebaseAuthWithGithub(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -125,7 +124,7 @@ class GithubLoginFragment : Fragment() {
                 Log.d("User", task.exception?.message.toString())
             }
         }
-    }
+    }*/
 
 
 

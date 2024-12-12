@@ -11,12 +11,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import com.example.firebasesamplejonathan.R
 import com.example.firebasesamplejonathan.databinding.FragmentLoginBinding
+import com.example.firebasesamplejonathan.ui.notifications.NotificationsFragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -32,6 +37,9 @@ class LoginFragment : Fragment() {
 
     //private lateinit var signInRequest: BeginSignInRequest
     private lateinit var loginViewModel: LoginViewModel
+
+    private lateinit var callback: OnBackPressedCallback
+
     private var _binding: FragmentLoginBinding? = null
 
     //auth for basic email/password sign in
@@ -45,7 +53,6 @@ class LoginFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
 
 
     override fun onCreateView(
@@ -65,13 +72,15 @@ class LoginFragment : Fragment() {
             .get(LoginViewModel::class.java)
         //initializing the auth
         auth = Firebase.auth
+
+
         setupGoogleAuth()
 
         val usernameEditText = binding.username
         val passwordEditText = binding.password
         val loginButton = binding.login
         val loadingProgressBar = binding.loading
-        val newAccountButton=binding.newAccountButton
+        val newAccountButton = binding.newAccountButton
 
         loginViewModel.loginFormState.observe(viewLifecycleOwner,
             Observer { loginFormState ->
@@ -136,8 +145,11 @@ class LoginFragment : Fragment() {
             verifyFirebaseUser(usernameEditText.text.toString(), passwordEditText.text.toString())
         }
 
-        newAccountButton.setOnClickListener{
-                createNewFirebaseUser(usernameEditText.text.toString(), passwordEditText.text.toString())
+        newAccountButton.setOnClickListener {
+            createNewFirebaseUser(
+                usernameEditText.text.toString(),
+                passwordEditText.text.toString()
+            )
 
         }
 
@@ -163,6 +175,20 @@ class LoginFragment : Fragment() {
             if (task.isSuccessful) {
                 val user = auth.currentUser
                 Toast.makeText(context, "Good Login by ${user?.email}", Toast.LENGTH_LONG).show()
+                //navigate to home page
+                val supportFragmentManager= requireActivity().supportFragmentManager
+                supportFragmentManager.popBackStack ();
+                //findNavController().navigate(R.id.navigation_home)
+
+                findNavController().navigate(
+                    R.id.navigation_home,
+                    null,
+                    NavOptions.Builder()
+                        .setPopUpTo(
+                            R.id.navigation_login,
+                            true
+                        ) // Set inclusive to true if you want to remove the startDestination as well
+                        .build())
             } else {
                 Toast.makeText(context, "Bad Login: ${task.exception?.message}", Toast.LENGTH_LONG)
                     .show()
@@ -170,14 +196,15 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun createNewFirebaseUser(email: String, password: String){
+    private fun createNewFirebaseUser(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
-                    Toast.makeText(context, "New Account by ${user?.email}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "New Account by ${user?.email}", Toast.LENGTH_LONG)
+                        .show()
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
@@ -234,3 +261,15 @@ class LoginFragment : Fragment() {
         }
     }
 }
+//use for logout logic
+/*                findNavController().navigate(
+                    R.id.navigation_home,
+                    null,
+                    NavOptions.Builder()
+                        .setPopUpTo(
+                            R.id.navigation_login,
+                            true
+                        ) // Set inclusive to true if you want to remove the startDestination as well
+                        .build()
+
+                )*/
